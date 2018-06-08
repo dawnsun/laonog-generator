@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${package}.mapper.${className}Mapper">
+
+   <resultMap type="${package}.entity.${className}DO" id="${classname}Map">
+      #foreach($column in $columns)
+         <result property="${column.attrname}" column="${column.columnName}" jdbcType="${column.attrType}"/>
+      #end
+   </resultMap>
+
+    <sql id="Base_Column_List">
+        ${allColumnName}
+    </sql>
+
+    <sql id="table_name">
+        ${tableName}
+    </sql>
+
+    <insert id="insert${classname}" parameterType="${package}.entity.${className}DO">
+        insert into <include refid="table_name"/> (<include refid="Base_Column_List" />)
+        values (${allColumnValue})
+        <selectKey resultType="java.lang.Long" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="update${classname}" parameterType="${package}.entity.${className}DO" >
+        update <include refid="table_name"/>
+        <set>
+            #foreach($column in $columns)
+            #if(${column.attrname}!="id")
+            <if test="${column.attrname} != null and ${column.attrname} !=''">
+                ${column.columnName} = #{${column.attrname},jdbcType=${column.attrType}},
+            </if>
+            #end
+            #end
+        </set>
+        <where>
+            id  = #{id}
+        </where>
+    </update>
+
+    <update id="delete${classname}" parameterType="${package}.entity.${className}DO" >
+        update <include refid="table_name"/>
+        <set>
+            is_deleted = #{isDeleted,jdbcType=INTEGER}
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <select id="get${classname}" parameterType="${package}.query.${classQueryName}" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="table_name"/>
+        <where>
+            <if test="id != null and id!=''">
+                id=#{id}
+            </if>
+            <if test="isDeleted != null and isDeleted!=''">
+                AND is_deleted = #{isDeleted}
+            </if>
+        </where>
+    </select>
+
+    <select id="get${classname}Count" parameterType="${package}.query.${classQueryName}" resultType="java.lang.Long">
+        select
+        count(id)
+        from
+        <include refid="table_name"/>
+        <where>
+            #foreach($column in $columns)
+            #if(${column.attrname}!="id")
+            <if test="${column.attrname} != null and ${column.attrname} !=''">
+                ${column.columnName} = #{${column.attrname},jdbcType=${column.attrType}},
+            </if>
+            #end
+            #end
+        </where>
+    </select>
+
+    <select id="get${classname}List" parameterType="${package}.query.${classQueryName}" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="table_name"/>
+        <where>
+            #foreach($column in $columns)
+            #if(${column.attrname}!="id")
+            <if test="${column.attrname} != null and ${column.attrname} !=''">
+                ${column.columnName} = #{${column.attrname},jdbcType=${column.attrType}},
+            </if>
+            #end
+            #end
+        </where>
+
+    </select>
+
+    <select id="get${classname}Page" parameterType="${package}.query.${classQueryName}" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        <include refid="table_name"/>
+        <where>
+            #foreach($column in $columns)
+            #if(${column.attrname}!="id")
+            <if test="${column.attrname} != null and ${column.attrname} !=''">
+                ${column.columnName} = #{${column.attrname},jdbcType=${column.attrType}},
+            </if>
+            #end
+            #end
+        </where>
+        order by gmt_modified desc
+        limit #{offset},#{limit}
+    </select>
+
+</mapper>
