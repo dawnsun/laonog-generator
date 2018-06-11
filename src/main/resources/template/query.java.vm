@@ -1,8 +1,9 @@
-package ${package}.query;
+package ${package}.biz.query.${classname};
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import ${package}common.util.BaseQuery;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
 #end
@@ -16,8 +17,7 @@ import java.math.BigDecimal;
  * @date ${datetime}
  */
 ##@Table(name = "${tableName}")
-public class ${className} implements Serializable {
-private static final long serialVersionUID = 1L;
+public class ${className}Query extends BaseQuery {
 
 #foreach ($column in $columns)
     #if(${column.attrname}!="gmtCreate" || ${column.attrname}!="gmtCreate" || ${column.attrname}!="creator" || ${column.attrname}!="modifier")
@@ -30,13 +30,13 @@ private static final long serialVersionUID = 1L;
 #foreach ($column in $columns)
     #if(${column.attrname}!="id")
 /**
- * 设置：${column.comments}
+ * set${column.comments}
  */
 public void set${column.attrName}($column.attrType $column.attrname) {
     this.$column.attrname = $column.attrname;
     }
 /**
- * 获取：${column.comments}
+ * get${column.comments}
  */
 public $column.attrType get${column.attrName}() {
     return $column.attrname;

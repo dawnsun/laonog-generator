@@ -1,0 +1,51 @@
+package ${package}.biz.converter.${classname};
+
+import ${package}.biz.vos.${classname}.${className}VO;
+import ${package}.dal.entity.${classname}.${className}DO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * ${comments}数据模型转换
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public class ${className}Converter {
+
+    public static ${className}DO convertVO2DO(${className}VO ${classname}VO){
+        if(null == ${classname}VO){
+            return null;
+        }
+        ${className}DO ${classname}DO = new ${className}DO();
+        #foreach ($column in $columns)
+                ${classname}DO.set${column.attrName}(${classname}VO.get${column.attrName}());
+        #end
+        return ${classname}DO;
+    }
+
+    public static ${className}VO convertDO2VO(${className}DO ${classname}DO){
+        if(null == ${classname}DO){
+            return null;
+        }
+            ${className}VO ${classname}VO = new ${className}VO();
+        #foreach ($column in $columns)
+                ${classname}VO.set${column.attrName}(${classname}DO.get${column.attrName}());
+        #end
+        return ${classname}VO;
+    }
+
+    public static List<${className}VO> convertDOs2VOs(List<${className}DO> ${classname}DOList){
+        if (null == ${classname}DOList){
+            return null;
+        }
+        List<${className}VO> ${classname}VOList = new ArrayList<>();
+        for (${className}DO ${classname}DO : ${classname}DOList){
+                ${classname}VOList.add(convertDO2VO(${classname}DO));
+        }
+        return ${classname}VOList;
+    }
+
+}

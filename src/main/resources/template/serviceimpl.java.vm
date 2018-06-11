@@ -1,4 +1,4 @@
-package ${package}.biz;
+package ${package}.service.impl;
 
 import org.springframework.stereotype.Service;
 
@@ -14,5 +14,5 @@ import com.laonog.common.biz.BaseBiz;
  * @date ${datetime}
  */
 @Service
-public class ${className}Biz extends BaseBiz<${className}Mapper,${className}> {
+public class ${className}Service extends BaseBiz<${className}Mapper,${className}> {
 }

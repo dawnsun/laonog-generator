@@ -30,11 +30,12 @@ public class GeneratorUtils {
         templates.add("template/index.js.vm");
         templates.add("template/index.vue.vm");
         templates.add("template/mapper.xml.vm");
-        templates.add("template/biz.java.vm");
+        templates.add("template/serviceimpl.java.vm");
         templates.add("template/entity.java.vm");
-        templates.add("template/mapper.java.vm");
+        templates.add("template/dao.java.vm");
         templates.add("template/controller.java.vm");
         templates.add("template/query.java.vm");
+        templates.add("template/converter.java.vm");
         return templates;
     }
 
@@ -183,10 +184,10 @@ public class GeneratorUtils {
             return frontPath + "views" + File.separator + moduleName + File.separator + toLowerCaseFirstOne(className) + File.separator + "index.vue";
         }
 
-        if (template.contains("biz.java.vm")) {
+        if (template.contains("serviceimpl.java.vm")) {
             return packagePath + "biz" + File.separator + className + "Biz.java";
         }
-        if (template.contains("mapper.java.vm")) {
+        if (template.contains("dao.java.vm")) {
             return packagePath + "mapper" + File.separator + className + "Mapper.java";
         }
         if (template.contains("entity.java.vm")) {
@@ -201,6 +202,10 @@ public class GeneratorUtils {
 
         if (template.contains("query.java.vm")) {
             return packagePath + "query" + File.separator + className + "Query.java";
+        }
+
+        if (template.contains("converter.java.vm")) {
+            return packagePath + "converter" + File.separator + className + "Converter.java";
         }
 
         return null;

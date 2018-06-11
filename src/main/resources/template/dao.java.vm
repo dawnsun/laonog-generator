@@ -1,0 +1,23 @@
+package ${package}.dal.dao.${classname};
+
+import ${package}.dal.query.${classname}.${className}Query;
+import ${package}.dal.entity.${classname}.${className}DO;
+
+import java.util.List;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}DAO {
+    Integer insert${className}(${className}DO ${classname}DO);
+    Integer delete${className}(${className}DO ${classname}DO);
+    Integer update${className}(${className}DO ${classname}DO);
+     ${className}DO get${className}(${className}Query ${classname}Query);
+    Long get${className}Count(${className}Query ${classname}Query);
+    List<${className}DO> get${className}List(${className}Query ${classname}Query);
+    List<${className}DO> get${className}Page(${className}Query ${classname}Query);
+}

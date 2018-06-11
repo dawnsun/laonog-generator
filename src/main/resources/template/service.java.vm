@@ -1,0 +1,22 @@
+package ${package}.biz.service.${classname};
+
+import ${package}common.msg.TableResultResponse;
+import ${package}.biz.query.${classname}.${className}Query;
+import ${package}.biz.entity.${classname}.${className}VO;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}Service{
+    Boolean insert${className}(${className}VO ${classname}VO);
+    Boolean delete${className}(${className}VO ${classname}VO);
+    Boolean update${className}(${className}VO ${classname}VO);
+        ${className}VO get${className}(${className}Query ${classname}Query);
+    Long get${className}Count(${className}Query ${classname}Query);
+    List<${className}VO> get${className}List(${className}Query ${classname}Query);
+    TableResultResponse<${className}VO> get${className}Page(${className}Query ${classname}Query);
+}
