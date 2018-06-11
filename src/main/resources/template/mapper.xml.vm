@@ -17,7 +17,7 @@
         ${tableName}
     </sql>
 
-    <insert id="insert${classname}" parameterType="${package}.entity.${className}DO">
+    <insert id="insert${className}" parameterType="${package}.entity.${className}DO">
         insert into <include refid="table_name"/> (<include refid="Base_Column_List" />)
         values (${allColumnValue})
         <selectKey resultType="java.lang.Long" keyProperty="id">
@@ -25,7 +25,7 @@
         </selectKey>
     </insert>
 
-    <update id="update${classname}" parameterType="${package}.entity.${className}DO" >
+    <update id="update${className}" parameterType="${package}.entity.${className}DO" >
         update <include refid="table_name"/>
         <set>
             #foreach($column in $columns)
@@ -41,7 +41,7 @@
         </where>
     </update>
 
-    <update id="delete${classname}" parameterType="${package}.entity.${className}DO" >
+    <update id="delete${className}" parameterType="${package}.entity.${className}DO" >
         update <include refid="table_name"/>
         <set>
             is_deleted = #{isDeleted,jdbcType=INTEGER}
@@ -51,7 +51,7 @@
         </where>
     </update>
 
-    <select id="get${classname}" parameterType="${package}.query.${classQueryName}" resultMap="BaseResultMap">
+    <select id="get${className}" parameterType="${package}.query.${classQueryName}" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from
@@ -66,7 +66,7 @@
         </where>
     </select>
 
-    <select id="get${classname}Count" parameterType="${package}.query.${classQueryName}" resultType="java.lang.Long">
+    <select id="get${className}Count" parameterType="${package}.query.${classQueryName}" resultType="java.lang.Long">
         select
         count(id)
         from
@@ -82,7 +82,7 @@
         </where>
     </select>
 
-    <select id="get${classname}List" parameterType="${package}.query.${classQueryName}" resultMap="BaseResultMap">
+    <select id="get${className}List" parameterType="${package}.query.${classQueryName}" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from
@@ -99,7 +99,7 @@
 
     </select>
 
-    <select id="get${classname}Page" parameterType="${package}.query.${classQueryName}" resultMap="BaseResultMap">
+    <select id="get${className}Page" parameterType="${package}.query.${classQueryName}" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from
