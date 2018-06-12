@@ -30,12 +30,14 @@ public class GeneratorUtils {
         templates.add("template/index.js.vm");
         templates.add("template/index.vue.vm");
         templates.add("template/mapper.xml.vm");
+        templates.add("template/service.java.vm");
         templates.add("template/serviceimpl.java.vm");
         templates.add("template/entity.java.vm");
         templates.add("template/dao.java.vm");
         templates.add("template/controller.java.vm");
         templates.add("template/query.java.vm");
         templates.add("template/converter.java.vm");
+        templates.add("template/vo.java.vm");
         return templates;
     }
 
@@ -127,7 +129,7 @@ public class GeneratorUtils {
 
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("mainModule"))));
+                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(),tableEntity.getClassname().toLowerCase(), config.getString("package"), config.getString("mainModule"))));
                 IOUtils.write(sw.toString(), zip, "UTF-8");
                 IOUtils.closeQuietly(sw);
                 zip.closeEntry();
@@ -169,7 +171,7 @@ public class GeneratorUtils {
     /**
      * 获取文件名
      */
-    public static String getFileName(String template, String className, String packageName, String moduleName) {
+    public static String getFileName(String template, String className,String pathName, String packageName, String moduleName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
         String frontPath = "ui" + File.separator;
         if (StringUtils.isNotBlank(packageName)) {
@@ -185,27 +187,39 @@ public class GeneratorUtils {
         }
 
         if (template.contains("serviceimpl.java.vm")) {
-            return packagePath + "biz" + File.separator + className + "Biz.java";
+            return packagePath + "biz" + File.separator + "service" + File.separator + "impl" + File.separator + pathName + File.separator + className + "ServiceImpl.java";
         }
+
         if (template.contains("dao.java.vm")) {
-            return packagePath + "mapper" + File.separator + className + "Mapper.java";
+            return packagePath + "dal" + File.separator + "dao" + File.separator + pathName + File.separator + className + "DAO.java";
         }
+
         if (template.contains("entity.java.vm")) {
-            return packagePath + "entity" + File.separator + className + "DO.java";
+            return packagePath + "dal" + File.separator + "entity" + File.separator + pathName + File.separator + className + "DO.java";
         }
+
         if (template.contains("controller.java.vm")) {
-            return packagePath + "rest" + File.separator + className + "Controller.java";
+            return packagePath + "rest" + File.separator + pathName + File.separator + className + "Controller.java";
         }
+
         if (template.contains("mapper.xml.vm")) {
             return "main" + File.separator + "resources" + File.separator + "mapper" + File.separator + className + "Mapper.xml";
         }
 
         if (template.contains("query.java.vm")) {
-            return packagePath + "query" + File.separator + className + "Query.java";
+            return packagePath + "biz" + File.separator + "query" + File.separator + pathName + File.separator + className + "Query.java";
         }
 
         if (template.contains("converter.java.vm")) {
-            return packagePath + "converter" + File.separator + className + "Converter.java";
+            return packagePath + "biz" + File.separator + "converter" + File.separator + pathName + File.separator + className + "Converter.java";
+        }
+
+        if (template.contains("service.java.vm")) {
+            return packagePath + "biz" + File.separator + "service" + File.separator + pathName + File.separator + className + "Service.java";
+        }
+
+        if (template.contains("vo.java.vm")) {
+            return packagePath + "biz" + File.separator + "vos" + File.separator + pathName + File.separator + className + "VO.java";
         }
 
         return null;

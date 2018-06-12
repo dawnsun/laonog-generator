@@ -1,7 +1,7 @@
-package ${package}.biz.converter.${classname};
+package ${package}.biz.converter.${pathName};
 
-import ${package}.biz.vos.${classname}.${className}VO;
-import ${package}.dal.entity.${classname}.${className}DO;
+import ${package}.biz.vos.${pathName}.${className}VO;
+import ${package}.dal.entity.${pathName}.${className}DO;
 
 import java.util.ArrayList;
 import java.util.List;

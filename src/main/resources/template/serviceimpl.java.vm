@@ -1,10 +1,16 @@
-package ${package}.service.impl;
+package ${package}.service.${pathName}.impl;
 
 import org.springframework.stereotype.Service;
-
-import ${package}.entity.${className};
-import ${package}.mapper.${className}Mapper;
-import com.laonog.common.biz.BaseBiz;
+import ${package}common.msg.TableResultResponse;
+import ${package}.biz.query.${pathName}.${className}Query;
+import ${package}.biz.entity.${pathName}.${className}DO;
+import ${package}.biz.vos.${pathName}.${className}VO;
+import ${package}.dal.dao.${pathName}.${className}DAO;
+import ${package}.biz.converter.${pathName}.${className}Converter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import java.util.List;
+import ${package}common.msg.TableResultResponse;
 
 /**
  * ${comments}
@@ -14,5 +20,93 @@ import com.laonog.common.biz.BaseBiz;
  * @date ${datetime}
  */
 @Service
-public class ${className}Service extends BaseBiz<${className}Mapper,${className}> {
+public class ${className}ServiceImpl implements ${className}Service{
+    private Logger logger = LoggerFactory.getLogger(getClass());
+    @Resource
+    private ${className}DAO ${classname}DAO;
+
+    Boolean insert${className}(${className}VO ${classname}VO){
+        try{
+            ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
+            Long id = ${classname}DAO.insert${className}(${classname}DO);
+            if(id>0){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error("${className}Service insert${className} " + e);
+            return false;
+        }
+    }
+
+    Boolean delete${className}(${className}VO ${classname}VO){
+        try{
+            ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
+            Long id = ${classname}DAO.delete${className}(${classname}DO);
+            if(id>0){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error("${className}Service delete${className} " + e);
+            return false;
+        }
+    }
+
+    Boolean update${className}(${className}VO ${classname}VO){
+        try{
+            ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
+            Long id = ${classname}DAO.update${className}(${classname}DO);
+            if(id>0){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error("${className}Service update${className} " + e);
+            return false;
+        }
+    }
+
+    ${className}VO get${className}(${className}Query ${classname}Query){
+        try{
+            ${className}VO ${classname}VO = ${classname}DAO.get${className}(${classname}Query);
+            return ${classname}VO;
+        } catch (Exception e) {
+            logger.error("${className}Service get${className} " + e);
+            return null;
+        }
+    }
+
+    Long get${className}Count(${className}Query ${classname}Query){
+        try{
+            return ${classname}DAO.get${className}Count(${classname}Query);
+        } catch (Exception e) {
+            logger.error("${className}Service get${className}Count " + e);
+            return 0;
+        }
+    }
+
+    List<${className}VO> get${className}List(${className}Query ${classname}Query){
+        try{
+            List<${className}VO> ${classname}VOList = ${classname}DAO.get${className}(${classname}Query);
+            return ${classname}VOList;
+        } catch (Exception e) {
+            logger.error("${className}Service get${className}List " + e);
+            return null;
+        }
+    }
+
+    TableResultResponse<${className}VO> get${className}Page(${className}Query ${classname}Query){
+        try{
+            Long count = ${classname}DAO.get${className}Count(${classname}Query);
+            List<${className}VO> ${classname}VOList = ${classname}DAO.get${className}(${classname}Query);
+            return new TableResultResponse<${className}VO>(count,${classname}VOList);
+        } catch (Exception e) {
+            logger.error("${className}Service get${className}Page " + e);
+            return null;
+        }
+    }
 }

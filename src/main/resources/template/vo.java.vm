@@ -1,9 +1,8 @@
-package ${package}.biz.query.${pathName};
+package ${package}.biz.vos.${pathName};
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
-import ${package}common.util.BaseQuery;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
 #end
@@ -17,30 +16,34 @@ import java.math.BigDecimal;
  * @date ${datetime}
  */
 ##@Table(name = "${tableName}")
-public class ${className}Query extends BaseQuery {
+public class ${className}VO implements Serializable {
 
 #foreach ($column in $columns)
-    #if(${column.attrname}!="gmtCreate" || ${column.attrname}!="gmtCreate" || ${column.attrname}!="creator" || ${column.attrname}!="modifier")
+    #if($column.columnName == $pk.columnName)
+    //$column.comments
+    ##@Id
+    private $column.attrType $column.attrname;
+    #else
     //$column.comments
     ##@Column(name = "$column.columnName")
     private $column.attrType $column.attrname;
     #end
+
 #end
 
 #foreach ($column in $columns)
-    #if(${column.attrname}!="id")
 /**
  * set${column.comments}
  */
 public void set${column.attrName}($column.attrType $column.attrname) {
     this.$column.attrname = $column.attrname;
     }
+
 /**
  * get${column.comments}
  */
 public $column.attrType get${column.attrName}() {
     return $column.attrname;
     }
-    #end
 #end
     }

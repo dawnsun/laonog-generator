@@ -1,8 +1,9 @@
-package ${package}.biz.service.${classname};
+package ${package}.biz.service.${pathName};
 
 import ${package}common.msg.TableResultResponse;
-import ${package}.biz.query.${classname}.${className}Query;
-import ${package}.biz.entity.${classname}.${className}VO;
+import ${package}.biz.query.${pathName}.${className}Query;
+import ${package}.biz.vos.${pathName}.${className}VO;
+import java.util.List;
 
 /**
  * ${comments}

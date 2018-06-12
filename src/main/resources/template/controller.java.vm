@@ -1,13 +1,19 @@
-package ${package}.rest;
+package ${package}.web.controller;
 
 import com.laonog.common.rest.BaseController;
 import ${package}.biz.${className}Biz;
 import ${package}.entity.${className};
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("${secondModuleName}")
-public class ${className}Controller extends BaseController<${className}Biz,${className}> {
+public class ${className}Controller{
+
+    @Autowired
+    private ${className}Service ${classname}Service;
+
 
 }

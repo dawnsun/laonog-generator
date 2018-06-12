@@ -1,7 +1,7 @@
-package ${package}.dal.dao.${classname};
+package ${package}.dal.dao.${pathName};
 
-import ${package}.dal.query.${classname}.${className}Query;
-import ${package}.dal.entity.${classname}.${className}DO;
+import ${package}.dal.query.${pathName}.${className}Query;
+import ${package}.dal.entity.${pathName}.${className}DO;
 
 import java.util.List;
 
