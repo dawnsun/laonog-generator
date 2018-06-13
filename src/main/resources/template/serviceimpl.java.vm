@@ -30,12 +30,15 @@ public class ${className}ServiceImpl implements ${className}Service{
             ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
             Long id = ${classname}DAO.insert${className}(${classname}DO);
             if(id>0){
+                    ${classname}VO = ${className}Converter.convertDO2VO(${classname}DO);
                 return true;
             }else{
+                    ${classname}VO = null;
                 return false;
             }
         } catch (Exception e) {
             logger.error("${className}Service insert${className} " + e);
+                ${classname}VO = null;
             return false;
         }
     }
@@ -60,12 +63,15 @@ public class ${className}ServiceImpl implements ${className}Service{
             ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
             Long id = ${classname}DAO.update${className}(${classname}DO);
             if(id>0){
+                    ${classname}VO = ${className}Converter.convertDO2VO(${classname}DO);
                 return true;
             }else{
+                    ${classname}VO = null;
                 return false;
             }
         } catch (Exception e) {
             logger.error("${className}Service update${className} " + e);
+                ${classname}VO = null;
             return false;
         }
     }
