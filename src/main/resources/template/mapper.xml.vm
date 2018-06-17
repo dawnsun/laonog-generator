@@ -75,7 +75,7 @@
             #foreach($column in $columns)
             #if(${column.attrname}!="id")
             <if test="${column.attrname} != null and ${column.attrname} !=''">
-                ${column.columnName} = #{${column.attrname},jdbcType=${column.attrType}},
+                AND ${column.columnName} = #{${column.attrname},jdbcType=${column.attrType}}
             </if>
             #end
             #end
@@ -91,7 +91,7 @@
             #foreach($column in $columns)
             #if(${column.attrname}!="id")
             <if test="${column.attrname} != null and ${column.attrname} !=''">
-                ${column.columnName} = #{${column.attrname},jdbcType=${column.attrType}},
+                AND ${column.columnName} = #{${column.attrname},jdbcType=${column.attrType}}
             </if>
             #end
             #end
@@ -108,7 +108,7 @@
             #foreach($column in $columns)
             #if(${column.attrname}!="id")
             <if test="${column.attrname} != null and ${column.attrname} !=''">
-                ${column.columnName} = #{${column.attrname},jdbcType=${column.attrType}},
+               AND ${column.columnName} = #{${column.attrname},jdbcType=${column.attrType}}
             </if>
             #end
             #end
