@@ -51,7 +51,7 @@
         </where>
     </update>
 
-    <select id="get${className}" parameterType="${package}.biz.query.${pathName}.${classQueryName}" resultMap="BaseResultMap">
+    <select id="get${className}" parameterType="${package}.biz.query.${pathName}.${classQueryName}" resultMap="${classname}Map">
         select
         <include refid="Base_Column_List"/>
         from
@@ -82,7 +82,7 @@
         </where>
     </select>
 
-    <select id="get${className}List" parameterType="${package}.biz.query.${pathName}.${classQueryName}" resultMap="BaseResultMap">
+    <select id="get${className}List" parameterType="${package}.biz.query.${pathName}.${classQueryName}" resultMap="${classname}Map">
         select
         <include refid="Base_Column_List"/>
         from
@@ -99,7 +99,7 @@
 
     </select>
 
-    <select id="get${className}Page" parameterType="${package}.biz.query.${pathName}.${classQueryName}" resultMap="BaseResultMap">
+    <select id="get${className}Page" parameterType="${package}.biz.query.${pathName}.${classQueryName}" resultMap="${classname}Map">
         select
         <include refid="Base_Column_List"/>
         from
