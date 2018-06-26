@@ -1,6 +1,4 @@
-package
-
-    ${package}.biz.service.${pathName};
+package ${package}.biz.service.${pathName};
 
 import${package}common.msg.TableResultResponse;
 import ${package}.biz.query.${pathName}.${className}Query;
