@@ -25,6 +25,11 @@ public class ${className}ServiceImpl implements ${className}Service{
     @Resource
     private ${className}DAO ${classname}DAO;
 
+    /**
+     * 新增${comments}
+     * @param ${classname}VO
+     * @return
+     */
     Boolean insert${className}(${className}VO ${classname}VO){
         try{
             ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
@@ -43,6 +48,11 @@ public class ${className}ServiceImpl implements ${className}Service{
         }
     }
 
+    /**
+     * 删除${comments}
+     * @param ${classname}VO
+     * @return
+     */
     Boolean delete${className}(${className}VO ${classname}VO){
         try{
             ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
@@ -58,6 +68,11 @@ public class ${className}ServiceImpl implements ${className}Service{
         }
     }
 
+    /**
+     * 修改${comments}
+     * @param ${classname}VO
+     * @return
+     */
     Boolean update${className}(${className}VO ${classname}VO){
         try{
             ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
@@ -76,6 +91,11 @@ public class ${className}ServiceImpl implements ${className}Service{
         }
     }
 
+    /**
+     * 查询单个${comments}
+     * @param ${classname}Query
+     * @return
+     */
     ${className}VO get${className}(${className}Query ${classname}Query){
         try{
             ${className}VO ${classname}VO = ${classname}DAO.get${className}(${classname}Query);
@@ -86,15 +106,11 @@ public class ${className}ServiceImpl implements ${className}Service{
         }
     }
 
-    Long get${className}Count(${className}Query ${classname}Query){
-        try{
-            return ${classname}DAO.get${className}Count(${classname}Query);
-        } catch (Exception e) {
-            logger.error("${className}Service get${className}Count " + e);
-            return 0;
-        }
-    }
-
+    /**
+     * 查询列表${comments}
+     * @param ${classname}Query
+     * @return
+     */
     List<${className}VO> get${className}List(${className}Query ${classname}Query){
         try{
             List<${className}VO> ${classname}VOList = ${classname}DAO.get${className}(${classname}Query);
@@ -105,6 +121,11 @@ public class ${className}ServiceImpl implements ${className}Service{
         }
     }
 
+    /**
+     * 查询分页${comments}
+     * @param ${classname}Query
+     * @return
+     */
     TableResultResponse<${className}VO> get${className}Page(${className}Query ${classname}Query){
         try{
             Long count = ${classname}DAO.get${className}Count(${classname}Query);

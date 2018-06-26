@@ -13,11 +13,53 @@ import java.util.List;
  * @date ${datetime}
  */
 public interface ${className}DAO {
+
+    /**
+     * 新增${comments}
+     * @param ${classname}DO
+     * @return
+     */
     Integer insert${className}(${className}DO ${classname}DO);
+
+    /**
+     * 删除${comments}
+     * @param ${classname}DO
+     * @return
+     */
     Integer delete${className}(${className}DO ${classname}DO);
+
+    /**
+     * 修改${comments}
+     * @param ${classname}DO
+     * @return
+     */
     Integer update${className}(${className}DO ${classname}DO);
-     ${className}DO get${className}(${className}Query ${classname}Query);
+
+    /**
+     * 查询单个${comments}
+     * @param ${classname}Query
+     * @return
+     */
+    ${className}DO get${className}(${className}Query ${classname}Query);
+
+    /**
+     * 查询数量${comments}
+     * @param ${classname}Query
+     * @return
+     */
     Long get${className}Count(${className}Query ${classname}Query);
+
+    /**
+     * 查询列表${comments}
+     * @param ${classname}Query
+     * @return
+     */
     List<${className}DO> get${className}List(${className}Query ${classname}Query);
+
+    /**
+     * 查询分页${comments}
+     * @param ${classname}Query
+     * @return
+     */
     List<${className}DO> get${className}Page(${className}Query ${classname}Query);
 }

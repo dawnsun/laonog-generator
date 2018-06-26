@@ -16,6 +16,11 @@ public class ${className}Controller{
     @Autowired
     private ${className}Service ${classname}Service;
 
+    /**
+     * 新增${comments}
+     * @param ${classname}VO
+     * @return
+     */
     @RequestMapping(value = "",method = RequestMethod.POST)
     @ResponseBody
     public ObjectRestResponse<${className}VO> add(@RequestBody ${className}VO ${classname}VO){
@@ -25,6 +30,11 @@ public class ${className}Controller{
         return ${classname}ObjectRestResponse;
     }
 
+    /**
+     * 查询单个${comments}
+     * @param ${classname}Query
+     * @return
+     */
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     @ResponseBody
     public ObjectRestResponse<${className}VO> get(@PathVariable Long id){
@@ -37,6 +47,11 @@ public class ${className}Controller{
         return ${classname}ObjectRestResponse;
     }
 
+    /**
+     * 修改${comments}
+     * @param ${classname}VO
+     * @return
+     */
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
     @ResponseBody
     public ObjectRestResponse<${className}VO> update(@RequestBody ${className}VO ${classname}VO){
@@ -46,6 +61,11 @@ public class ${className}Controller{
         return ${classname}ObjectRestResponse;
     }
 
+    /**
+     * 删除${comments}
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @ResponseBody
     public ObjectRestResponse<${className}VO> delete(@PathVariable Long id){
@@ -56,12 +76,22 @@ public class ${className}Controller{
         return new ObjectRestResponse<${classname}VO>();
     }
 
+    /**
+     * 查询列表${comments}
+     * @param ${classname}Query
+     * @return
+     */
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
     public List<${className}VO> list(@RequestBody ${className}Query ${classname}Query){
         return ${classname}Service.get${className}List(${classname}Query);
     }
 
+    /**
+     * 查询分页${comments}
+     * @param ${classname}Query
+     * @return
+     */
     @RequestMapping(value = "/page",method = RequestMethod.GET)
     @ResponseBody
     public TableResultResponse<${className}VO> list(@RequestBody ${className}Query ${classname}Query){
