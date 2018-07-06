@@ -61,6 +61,8 @@ public class GeneratorUtils {
         //所有的列明和代值
         String allColumnName = "";
         String allColumnValue="";
+        //批量列表对象查询循环数据
+        String allColumnValueList="";
         //列信息
         List<ColumnEntity> columsList = new ArrayList<>();
         for (Map<String, String> column : columns) {
@@ -83,8 +85,9 @@ public class GeneratorUtils {
             if ("id".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null) {
                 tableEntity.setPk(columnEntity);
             }
-            allColumnValue +="#{"+columnEntity.getAttrname()+",jdbcType="+columnEntity.getAttrType()+"}, ";
+            allColumnValue +="#{"+columnEntity.getAttrname()+"}, ";
             allColumnName+=columnEntity.getColumnName()+", ";
+            allColumnValueList +="#{"+tableEntity.getClassname()+"DO."+columnEntity.getAttrname()+"}, ";
             columsList.add(columnEntity);
         }
         tableEntity.setColumns(columsList);
@@ -116,6 +119,7 @@ public class GeneratorUtils {
         map.put("secondModuleName", toLowerCaseFirstOne(className));
         map.put("allColumnName",allColumnName.substring(0,allColumnName.length() - 2));
         map.put("allColumnValue",allColumnValue.substring(0,allColumnValue.length() - 2));
+        map.put("allColumnValueList",allColumnValueList.substring(0,allColumnValue.length() - 2));
         map.put("classQueryName",classQueryName);
         VelocityContext context = new VelocityContext(map);
 
