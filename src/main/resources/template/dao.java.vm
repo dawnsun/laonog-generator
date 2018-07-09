@@ -2,7 +2,7 @@ package ${package}.dal.dao.${pathName};
 
 import ${package}.dal.query.${pathName}.${className}Query;
 import ${package}.dal.entity.${pathName}.${className}DO;
-
+import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
@@ -12,6 +12,7 @@ import java.util.List;
  * @email ${email}
  * @date ${datetime}
  */
+@Mapper
 public interface ${className}DAO {
 
     /**
