@@ -90,9 +90,26 @@ public class GeneratorUtils {
             if ("id".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null) {
                 tableEntity.setPk(columnEntity);
             }
-            allColumnValue +="#{"+columnEntity.getAttrname()+"}, ";
             allColumnName+=columnEntity.getColumnName()+", ";
-            allColumnValueList +="#{"+tableEntity.getClassname()+"DO."+columnEntity.getAttrname()+"}, ";
+            switch (columnEntity.getAttrname()){
+                case "gmtCreate":
+                    allColumnValue +="NOW(), ";
+                    allColumnValueList +="NOW(), ";
+                    break;
+                case "gmtModified":
+                    allColumnValue +="NOW(), ";
+                    allColumnValueList +="NOW(), ";
+                    break;
+                case "isDelete":
+                    allColumnValue +="0, ";
+                    allColumnValueList +="0, ";
+                    break;
+                default:
+                    allColumnValue +="#{"+columnEntity.getAttrname()+"}, ";
+                    allColumnValueList +="#{"+tableEntity.getClassname()+"DO."+columnEntity.getAttrname()+"}, ";
+                    break;
+            }
+
             columsList.add(columnEntity);
         }
         tableEntity.setColumns(columsList);
