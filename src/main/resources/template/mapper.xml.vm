@@ -66,7 +66,7 @@
    </update>
 
    <!--主键查询${comments} -->
-   <select id="get${className}" parameterType="${package}.biz.query.${pathName}.${classQueryName}" resultMap="${classname}Map">
+   <select id="get${className}" parameterType="${package}.dal.query.${pathName}.${classQueryName}" resultMap="${classname}Map">
       select
       <include refid="Base_Column_List"/>
       from
@@ -82,7 +82,7 @@
    </select>
 
    <!--查询${comments}数量 -->
-   <select id="get${className}Count" parameterType="${package}.biz.query.${pathName}.${classQueryName}" resultType="java.lang.Long">
+   <select id="get${className}Count" parameterType="${package}.dal.query.${pathName}.${classQueryName}" resultType="java.lang.Long">
       select
       count(id)
       from
@@ -99,7 +99,7 @@
    </select>
 
    <!--查询${comments}列表 -->
-   <select id="get${className}List" parameterType="${package}.biz.query.${pathName}.${classQueryName}" resultMap="${classname}Map">
+   <select id="get${className}List" parameterType="${package}.dal.query.${pathName}.${classQueryName}" resultMap="${classname}Map">
       select
       <include refid="Base_Column_List"/>
       from
@@ -116,7 +116,7 @@
    </select>
 
    <!--查询${comments}分页 -->
-   <select id="get${className}Page" parameterType="${package}.biz.query.${pathName}.${classQueryName}" resultMap="${classname}Map">
+   <select id="get${className}Page" parameterType="${package}.dal.query.${pathName}.${classQueryName}" resultMap="${classname}Map">
       select
       <include refid="Base_Column_List"/>
       from

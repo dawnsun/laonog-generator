@@ -1,16 +1,17 @@
 package ${package}.service.${pathName}.impl;
 
+import ${package}.biz.service.${pathName}.${className}Service;
 import org.springframework.stereotype.Service;
+import javax.annotation.Resource;
 import ${package}common.msg.TableResultResponse;
-import ${package}.biz.query.${pathName}.${className}Query;
-import ${package}.biz.entity.${pathName}.${className}DO;
+import ${package}.dal.query.${pathName}.${className}Query;
+import ${package}.dal.entity.${pathName}.${className}DO;
 import ${package}.biz.vos.${pathName}.${className}VO;
 import ${package}.dal.dao.${pathName}.${className}DAO;
 import ${package}.biz.converter.${pathName}.${className}Converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
-import ${package}common.msg.TableResultResponse;
 
 /**
  * ${comments}
@@ -30,10 +31,11 @@ public class ${className}ServiceImpl implements ${className}Service{
      * @param ${classname}VO
      * @return
      */
-    Boolean insert${className}(${className}VO ${classname}VO){
+    @Override
+    public  Boolean insert${className}(${className}VO ${classname}VO){
         try{
             ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
-            Long id = ${classname}DAO.insert${className}(${classname}DO);
+            Integer id = ${classname}DAO.insert${className}(${classname}DO);
             if(id>0){
                     ${classname}VO = ${className}Converter.convertDO2VO(${classname}DO);
                 return true;
@@ -53,10 +55,11 @@ public class ${className}ServiceImpl implements ${className}Service{
      * @param ${classname}VO
      * @return
      */
-    Boolean delete${className}(${className}VO ${classname}VO){
+    @Override
+    public Boolean delete${className}(${className}VO ${classname}VO){
         try{
             ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
-            Long id = ${classname}DAO.delete${className}(${classname}DO);
+            Integer id = ${classname}DAO.delete${className}(${classname}DO);
             if(id>0){
                 return true;
             }else{
@@ -73,10 +76,11 @@ public class ${className}ServiceImpl implements ${className}Service{
      * @param ${classname}VO
      * @return
      */
-    Boolean update${className}(${className}VO ${classname}VO){
+    @Override
+    public Boolean update${className}(${className}VO ${classname}VO){
         try{
             ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
-            Long id = ${classname}DAO.update${className}(${classname}DO);
+            Integer id = ${classname}DAO.update${className}(${classname}DO);
             if(id>0){
                     ${classname}VO = ${className}Converter.convertDO2VO(${classname}DO);
                 return true;
@@ -96,9 +100,12 @@ public class ${className}ServiceImpl implements ${className}Service{
      * @param ${classname}Query
      * @return
      */
-    ${className}VO get${className}(${className}Query ${classname}Query){
+    @Override
+    public ${className}VO get${className}(${className}Query ${classname}Query){
         try{
-            ${className}VO ${classname}VO = ${classname}DAO.get${className}(${classname}Query);
+            ${className}VO ${classname}VO = new ${className}VO();
+            ${className}DO ${classname}DO = ${classname}DAO.get${className}(${classname}Query);
+            ${classname}VO = ${classname}Converter.convertDO2VO(${classname}DO);
             return ${classname}VO;
         } catch (Exception e) {
             logger.error("${className}Service get${className} " + e);
@@ -111,9 +118,12 @@ public class ${className}ServiceImpl implements ${className}Service{
      * @param ${classname}Query
      * @return
      */
-    List<${className}VO> get${className}List(${className}Query ${classname}Query){
+    @Override
+    public List<${className}VO> get${className}List(${className}Query ${classname}Query){
         try{
-            List<${className}VO> ${classname}VOList = ${classname}DAO.get${className}(${classname}Query);
+            List<${className}VO> ${classname}VOList = new ArrayList<>();
+            List<${className}DO> ${classname}DOList = ${classname}DAO.get${className}List(${classname}Query);
+            ${classname}VOList =  ${classname}Converter.convertDOs2VOs(${classname}DOList);
             return ${classname}VOList;
         } catch (Exception e) {
             logger.error("${className}Service get${className}List " + e);
@@ -126,10 +136,13 @@ public class ${className}ServiceImpl implements ${className}Service{
      * @param ${classname}Query
      * @return
      */
-    TableResultResponse<${className}VO> get${className}Page(${className}Query ${classname}Query){
+    @Override
+    public TableResultResponse<${className}VO> get${className}Page(${className}Query ${classname}Query){
         try{
+            List<${className}VO> ${classname}VOList = new ArrayList<>();
             Long count = ${classname}DAO.get${className}Count(${classname}Query);
-            List<${className}VO> ${classname}VOList = ${classname}DAO.get${className}(${classname}Query);
+            List<${className}DO> ${classname}DOList = ${classname}DAO.get${className}List(${classname}Query);
+            ${classname}VOList =  ${classname}Converter.convertDOs2VOs(${classname}DOList);
             return new TableResultResponse<${className}VO>(count,${classname}VOList);
         } catch (Exception e) {
             logger.error("${className}Service get${className}Page " + e);

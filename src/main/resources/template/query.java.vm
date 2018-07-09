@@ -1,4 +1,4 @@
-package ${package}.biz.query.${pathName};
+package ${package}.dal.query.${pathName};
 
 import java.util.Date;
 import javax.persistence.*;

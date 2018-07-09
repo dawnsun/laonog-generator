@@ -1,7 +1,7 @@
 package ${package}.biz.service.${pathName};
 
-import${package}common.msg.TableResultResponse;
-import ${package}.biz.query.${pathName}.${className}Query;
+import ${package}common.msg.TableResultResponse;
+import ${package}.dal.query.${pathName}.${className}Query;
 import ${package}.biz.vos.${pathName}.${className}VO;
 import java.util.List;
 
