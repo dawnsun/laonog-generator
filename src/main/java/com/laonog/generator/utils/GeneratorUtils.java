@@ -68,7 +68,12 @@ public class GeneratorUtils {
         for (Map<String, String> column : columns) {
             ColumnEntity columnEntity = new ColumnEntity();
             columnEntity.setColumnName(column.get("columnName"));
-            columnEntity.setDataType(column.get("dataType"));
+            if("datetime".equals(column.get("dataType"))){
+                columnEntity.setDataType("TIMESTAMP");
+            }else{
+                columnEntity.setDataType(StringUtils.swapCase(column.get("dataType")));
+            }
+
             columnEntity.setComments(column.get("columnComment"));
             columnEntity.setExtra(column.get("extra"));
 
@@ -211,7 +216,7 @@ public class GeneratorUtils {
         }
 
         if (template.contains("query.java.vm")) {
-            return packagePath + "biz" + File.separator + "query" + File.separator + pathName + File.separator + className + "Query.java";
+            return packagePath + "dal" + File.separator + "query" + File.separator + pathName + File.separator + className + "Query.java";
         }
 
         if (template.contains("converter.java.vm")) {
