@@ -38,6 +38,7 @@ public class GeneratorUtils {
         templates.add("template/query.java.vm");
         templates.add("template/converter.java.vm");
         templates.add("template/vo.java.vm");
+        templates.add("template/codeEnum.java.vm");
         return templates;
     }
 
@@ -77,6 +78,7 @@ public class GeneratorUtils {
             columnEntity.setComments(column.get("columnComment"));
             columnEntity.setExtra(column.get("extra"));
             columnEntity.setIsNullAble(column.get("isNullAble"));
+            columnEntity.setColumnNAME(StringUtils.upperCase(column.get("columnName")));
             //列名转换成Java属性名
             String attrName = columnToJava(columnEntity.getColumnName());
             columnEntity.setAttrName(attrName);
@@ -248,6 +250,9 @@ public class GeneratorUtils {
             return packagePath + "biz" + File.separator + "vos" + File.separator + pathName + File.separator + className + "VO.java";
         }
 
+        if (template.contains("codeEnum.java.vm")) {
+            return packagePath + "biz" + File.separator + "vos" + File.separator + pathName + File.separator + className + "CodeEnum.java";
+        }
         return null;
     }
 

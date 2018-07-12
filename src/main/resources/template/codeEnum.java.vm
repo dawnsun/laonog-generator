@@ -1,0 +1,97 @@
+package ${package}.common.constants.emum.${pathName};
+
+import org.apache.commons.lang.StringUtils;
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+##@Table(name = "${tableName}")
+public enum ${className}CodeEnum {
+
+    USERNAME_EMPTY("username empty", "用户名为空"),
+
+    PASSWORD_EMPTY("password empty", "密码为空"),
+
+
+
+    ;
+
+#foreach ($column in $columns)
+	#if($column.isNullAble == "NO")
+
+            ${column.columnNAME}_EMPTY("${column.attrName} empty", "${column.comments}为空")},
+
+	#else
+
+	#end
+
+#end
+
+    private String code;
+
+    private String message;
+		${className}CodeEnum(String code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    /**
+     * 根据code获取message
+     *
+     * @param code
+     * @return
+     */
+    public static String getDescByCode(String code) {
+        if (StringUtils.isBlank(code)) {
+            return null;
+        }
+        for (${className}CodeEnum object : ${className}CodeEnum.values()) {
+            if (object.getCode().equals(code)) {
+                return object.getMessage();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 根据code获取枚举对象
+     *
+     * @param code
+     * @return
+     */
+    public static ${className}CodeEnum getEnumObjByCode(String code) {
+        if (StringUtils.isBlank(code)) {
+            return null;
+        }
+        for (${className}CodeEnum object : ${className}CodeEnum.values()) {
+            if (object.getCode().equals(code)) {
+                return object;
+            }
+        }
+        return null;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+}

@@ -6,6 +6,8 @@ package com.laonog.generator.entity;
 public class ColumnEntity {
 	//列名
     private String columnName;
+    //全大写列明
+    private String columnNAME;
     //列名类型
     private String dataType;
     //列名备注
@@ -72,4 +74,12 @@ public class ColumnEntity {
 	public void setIsNullAble(String isNullAble) {
 		this.isNullAble = isNullAble;
 	}
+
+    public String getColumnNAME() {
+        return columnNAME;
+    }
+
+    public void setColumnNAME(String columnNAME) {
+        this.columnNAME = columnNAME;
+    }
 }
