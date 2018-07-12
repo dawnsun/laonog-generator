@@ -19,6 +19,8 @@ public class ColumnEntity {
     private String attrType;
     //auto_increment
     private String extra;
+	//是否为空
+    private String isNullAble;
     
 	public String getColumnName() {
 		return columnName;
@@ -61,5 +63,13 @@ public class ColumnEntity {
 	}
 	public void setExtra(String extra) {
 		this.extra = extra;
+	}
+
+	public String getIsNullAble() {
+		return isNullAble;
+	}
+
+	public void setIsNullAble(String isNullAble) {
+		this.isNullAble = isNullAble;
 	}
 }
