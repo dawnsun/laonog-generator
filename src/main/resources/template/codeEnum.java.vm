@@ -16,12 +16,14 @@ import java.math.BigDecimal;
 ##@Table(name = "${tableName}")
 public enum ${className}CodeEnum {
 
-    USERNAME_EMPTY("username empty", "用户名为空"),
+#foreach ($column in $columns)
+    #if($column.isNullAble == "NO")
 
-    PASSWORD_EMPTY("password empty", "密码为空"),
+            ${column.columnNAME}_EMPTY("${column.attrName} empty", "${column.comments}为空")},
 
+    #end
 
-
+#end
     ;
 
 #foreach ($column in $columns)
