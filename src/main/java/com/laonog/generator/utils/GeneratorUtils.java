@@ -76,7 +76,7 @@ public class GeneratorUtils {
 
             columnEntity.setComments(column.get("columnComment"));
             columnEntity.setExtra(column.get("extra"));
-
+            columnEntity.setIsNullAble(column.get("isNullAble"));
             //列名转换成Java属性名
             String attrName = columnToJava(columnEntity.getColumnName());
             columnEntity.setAttrName(attrName);
