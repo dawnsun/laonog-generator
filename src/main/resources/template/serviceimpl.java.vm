@@ -6,7 +6,7 @@ import javax.annotation.Resource;
 import ${package}common.msg.TableResultResponse;
 import ${package}.dal.query.${pathName}.${className}Query;
 import ${package}.dal.entity.${pathName}.${className}DO;
-import ${package}.biz.vos.${pathName}.${className}VO;
+import ${package}.api.vos.${pathName}.${className}VO;
 import ${package}.dal.dao.${pathName}.${className}DAO;
 import ${package}.biz.converter.${pathName}.${className}Converter;
 import org.slf4j.Logger;

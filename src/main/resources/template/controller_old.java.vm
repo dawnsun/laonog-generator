@@ -1,18 +1,17 @@
 package ${package}.web.controller;
 
-import ${package}.api.facade.${pathName}.${className}Client;
 import com.laonog.common.constants.DataStateConstants;
 import ${package}.biz.service.${pathName}.${className}Service;
 import ${package}.biz.vos.${pathName}.${className}VO;
 import ${package}.biz.query.${pathName}.${className}Query;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
-public class ${className}Controller implements ${className}Client{
+@Controller
+@RequestMapping("${secondModuleName}")
+public class ${className}Controller{
 
     @Autowired
     private ${className}Service ${classname}Service;
@@ -22,8 +21,9 @@ public class ${className}Controller implements ${className}Client{
      * @param ${classname}VO
      * @return
      */
-    @Override
-    public ObjectRestResponse<${className}VO> insert(${className}VO ${classname}VO){
+    @RequestMapping(value = "",method = RequestMethod.POST)
+    @ResponseBody
+    public ObjectRestResponse<${className}VO> add(@RequestBody ${className}VO ${classname}VO){
         ObjectRestResponse<${className}VO> ${classname}ObjectRestResponse = new ObjectRestResponse<>();
         ${classname}Service.insert${className}(${classname}VO);
         ${classname}ObjectRestResponse.data(${classname}VO);
@@ -35,8 +35,9 @@ public class ${className}Controller implements ${className}Client{
      * @param ${classname}Query
      * @return
      */
-    @Override
-    public ObjectRestResponse<${className}VO> get(Long id){
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    @ResponseBody
+    public ObjectRestResponse<${className}VO> get(@PathVariable Long id){
         ObjectRestResponse<${className}VO> ${classname}ObjectRestResponse = new ObjectRestResponse<>();
         ${className}Query ${classname}Query = new ${className}Query();
         ${classname}Query.setIsDeleted(DataStateConstants.IS_DELETED);
@@ -51,8 +52,9 @@ public class ${className}Controller implements ${className}Client{
      * @param ${classname}VO
      * @return
      */
-    @Override
-    public ObjectRestResponse<${className}VO> update(${className}VO ${classname}VO){
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    @ResponseBody
+    public ObjectRestResponse<${className}VO> update(@RequestBody ${className}VO ${classname}VO){
         ObjectRestResponse<${className}VO> ${classname}ObjectRestResponse = new ObjectRestResponse<>();
         ${classname}Service.update${className}(${classname}VO);
         ${classname}ObjectRestResponse.data(${classname}VO);
@@ -64,8 +66,9 @@ public class ${className}Controller implements ${className}Client{
      * @param id
      * @return
      */
-    @Override
-    public ObjectRestResponse<Boolean> delete(Long id){
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ObjectRestResponse<${className}VO> delete(@PathVariable Long id){
         ${className}VO ${classname}VO = new ${className}VO();
         ${classname}VO.setIsDeleted(DataStateConstants.DELETED);
         ${classname}VO.setId(id);
@@ -78,8 +81,9 @@ public class ${className}Controller implements ${className}Client{
      * @param ${classname}Query
      * @return
      */
-    @Override
-    public List<${className}VO> list(${className}Query ${classname}Query){
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @ResponseBody
+    public List<${className}VO> list(@RequestBody ${className}Query ${classname}Query){
         return ${classname}Service.get${className}List(${classname}Query);
     }
 
@@ -88,8 +92,9 @@ public class ${className}Controller implements ${className}Client{
      * @param ${classname}Query
      * @return
      */
-    @Override
-    public TableResultResponse<${className}VO> list(${className}Query ${classname}Query){
+    @RequestMapping(value = "/page",method = RequestMethod.GET)
+    @ResponseBody
+    public TableResultResponse<${className}VO> list(@RequestBody ${className}Query ${classname}Query){
         return ${classname}Service.get${className}Page(${classname}Query);
     }
 

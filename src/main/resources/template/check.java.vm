@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 /**
  * ${comments}
- * 
+ *
  * @author ${author}
  * @email ${email}
  * @date ${datetime}
@@ -22,41 +22,99 @@ public class ${className}Check {
 
     /**
      * 新增入参数据校验
+     *
      * @param sysUserVO
      * @return
      */
-    public static CheckResponse checkInsertPaream(${className}VO ${classname}VO){
-        if(null==${classname}VO){
-            return new CheckResponse(ErrorCodeEnum.PARAM_IS_EMPTY.getErrorCode(), ErrorCodeEnum.PARAM_IS_EMPTY.getErrorMessage());
+    public static CheckResponse checkInsertPaream(${className}VO ${classname}VO) {
+        if (null == ${classname}VO) {
+            return new CheckResponse(ErrorCodeEnum.PARAM_IS_EMPTY.getErrorCode(),
+                ErrorCodeEnum.PARAM_IS_EMPTY.getErrorMessage());
         }
         #foreach ($column in $columns)
-            #if(${column.attrname}!="gmtCreate" || ${column.attrname}!="gmtCreate" || ${column.attrname}!="creator" || ${column.attrname}!="modifier" || ${column.attrname}!="isDelete" || ${column.attrname}!="id")
             #if($column.isNullAble == "NO")
-        if(StringUtils.isEmpty(${classname}VO.get${column.attrName}())){
-            return new CheckResponse(${className}CodeEnum.${column.columnNAME}_EMPTY.getCode(), ${className}CodeEnum.${column.columnNAME}_EMPTY.getMessage());
-        }
-            #end
+                #if($column.attrname != "id")
+                    #if($column.attrname != "gmtCreate")
+                        #if($column.attrname != "gmtModified")
+                            #if(${column.attrname} != "creator")
+                                #if($column.attrname != "modifier")
+                                    #if($column.attrname != "isDelete")
+                                        #if($column.attrType == "String")
+                                            if (StringUtils.isEmpty(${classname}VO.get${column.attrName}())) {
+                                                return new CheckResponse(
+                                                            ${className}CodeEnum.${column.columnNAME}_EMPTY.getCode(),
+                                                            ${className}CodeEnum.${column.columnNAME}_EMPTY
+                                                    .getMessage());
+                                            }
+                                        #else
+                                            if (null == ${classname}VO.get${column.attrName}()) {
+                                                return new CheckResponse(
+                                                            ${className}CodeEnum.${column.columnNAME}_EMPTY.getCode(),
+                                                            ${className}CodeEnum.${column.columnNAME}_EMPTY
+                                                    .getMessage());
+                                            }
+                                        #end
+                                    #end
+                                #end
+                            #end
+                        #end
+                    #end
+                #end
             #end
         #end
         return new CheckResponse(SuccessCodeEnum.PAREAM_CHEKC.getSuccessMessage());
     }
 
     /**
-         * 修改入参数据校验
-         * @param sysUserVO
-         * @return
-         */
-    public static CheckResponse checkUpdatePaream(${className}VO ${classname}VO){
-        if(null==${classname}VO){
-            return new CheckResponse(ErrorCodeEnum.PARAM_IS_EMPTY.getErrorCode(), ErrorCodeEnum.PARAM_IS_EMPTY.getErrorMessage());
+     * 修改入参数据校验
+     * @param sysUserVO
+     * @return
+     */
+    public static CheckResponse checkUpdatePaream(${className}VO ${classname}VO) {
+        if (null == ${classname}VO) {
+            return new CheckResponse(ErrorCodeEnum.PARAM_IS_EMPTY.getErrorCode(),
+                ErrorCodeEnum.PARAM_IS_EMPTY.getErrorMessage());
         }
         #foreach ($column in $columns)
             #if($column.isNullAble == "NO")
-                if(StringUtils.isEmpty(${classname}VO.get${column.attrName}())){
-                    return new CheckResponse(${className}CodeEnum.${column.columnNAME}_EMPTY.getCode(), ${className}CodeEnum.${column.columnNAME}_EMPTY.getMessage());
-                }
+                #if($column.attrname != "gmtCreate")
+                    #if($column.attrname != "gmtModifier")
+                        #if(${column.attrname} != "creator")
+                            #if($column.attrname != "modifier")
+                                #if($column.attrname != "isDelete")
+                                    #if($column.attrType == "String")
+                                        if (StringUtils.isEmpty(${classname}VO.get${column.attrName}())) {
+                                            return new CheckResponse(
+                                                        ${className}CodeEnum.${column.columnNAME}_EMPTY.getCode(),
+                                                        ${className}CodeEnum.${column.columnNAME}_EMPTY.getMessage());
+                                        }
+                                    #else
+                                        if (null == ${classname}VO.get${column.attrName}()) {
+                                            return new CheckResponse(
+                                                        ${className}CodeEnum.${column.columnNAME}_EMPTY.getCode(),
+                                                        ${className}CodeEnum.${column.columnNAME}_EMPTY.getMessage());
+                                        }
+                                    #end
+                                #end
+                            #end
+                        #end
+                    #end
+                #end
             #end
         #end
+        return new CheckResponse(SuccessCodeEnum.PAREAM_CHEKC.getSuccessMessage());
+    }
+
+    /**
+     * 单条数据主键数据校验
+     * @param id
+     * @return
+     */
+    public static CheckResponse checkPareamKey(Long id) {
+        if (null == id) {
+            return new CheckResponse(ErrorCodeEnum.PARAM_IS_EMPTY.getErrorCode(),
+                ErrorCodeEnum.PARAM_IS_EMPTY.getErrorMessage());
+        }
         return new CheckResponse(SuccessCodeEnum.PAREAM_CHEKC.getSuccessMessage());
     }
 }

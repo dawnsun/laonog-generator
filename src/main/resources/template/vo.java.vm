@@ -1,4 +1,4 @@
-package ${package}.biz.vos.${pathName};
+package ${package}.api.vos.${pathName};
 
 import java.io.Serializable;
 import java.util.Date;

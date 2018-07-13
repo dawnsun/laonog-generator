@@ -36,7 +36,7 @@ public interface ${className}Service {
      * @return
      */
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    ObjectRestResponse<Boolean> delete${className}(@PathVariable Long id);
+    ObjectRestResponse<Boolean> delete${className}(@PathVariable("id") Long id);
 
     /**
      * 修改
@@ -52,7 +52,7 @@ public interface ${className}Service {
      * @return
      */
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    ObjectRestResponse<${className}VO> get${className}(@PathVariable Long id);
+    ObjectRestResponse<${className}VO> get${className}(@PathVariable("id") Long id);
 
     /**
      * 查询列表
