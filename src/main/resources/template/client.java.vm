@@ -1,0 +1,73 @@
+package ${package}.api.facade.${pathName};
+
+
+import ${package}.dal.query.${pathName}.${className}Query;
+import ${package}.api.vos.${pathName}.${className}VO;
+import ${package}.common.response.ListRestResponse;
+import ${package}.common.response.ObjectRestResponse;
+import ${package}.common.response.TableResultResponse;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import java.util.List;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@RequestMapping("${classname}")
+public interface ${className}Service {
+
+    /**
+     * 新增${comments}
+     * @param ${classname}VO
+     * @return
+     */
+    @RequestMapping(value = "",method = RequestMethod.POST)
+    ObjectRestResponse<${className}VO> insert${className}(@RequestBody ${className}VO ${classname}VO);
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    ObjectRestResponse<Boolean> delete${className}(@PathVariable Long id);
+
+    /**
+     * 修改
+     * @param sysUserVO
+     * @return
+     */
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    ObjectRestResponse<${className}VO> update${className}(@RequestBody ${className}VO ${classname}VO);
+
+    /**
+     * 查询单个
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    ObjectRestResponse<${className}VO> get${className}(@PathVariable Long id);
+
+    /**
+     * 查询列表
+     * @param sysUserQuery
+     * @return
+     */
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    ListRestResponse<List<${className}VO>> get${className}List(@RequestBody ${className}Query ${classname}Query);
+
+    /**
+     * 查询分页
+     * @param sysUserQuery
+     * @return
+     */
+    @RequestMapping(value = "/page",method = RequestMethod.GET)
+    TableResultResponse<${className}VO> get${className}Page(@RequestBody ${className}Query ${classname}Query);
+
+}

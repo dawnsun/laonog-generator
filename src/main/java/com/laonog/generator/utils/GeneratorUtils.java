@@ -39,6 +39,9 @@ public class GeneratorUtils {
         templates.add("template/converter.java.vm");
         templates.add("template/vo.java.vm");
         templates.add("template/codeEnum.java.vm");
+        templates.add("template/check.java.vm");
+        templates.add("template/client.java.vm");
+
         return templates;
     }
 
@@ -247,12 +250,21 @@ public class GeneratorUtils {
         }
 
         if (template.contains("vo.java.vm")) {
-            return packagePath + "biz" + File.separator + "vos" + File.separator + pathName + File.separator + className + "VO.java";
+            return packagePath + "api" + File.separator + "vos" + File.separator + pathName + File.separator + className + "VO.java";
         }
 
         if (template.contains("codeEnum.java.vm")) {
-            return packagePath + "biz" + File.separator + "vos" + File.separator + pathName + File.separator + className + "CodeEnum.java";
+            return packagePath + "common" + File.separator + "enums" + File.separator + pathName + File.separator + className + "CodeEnum.java";
         }
+
+        if (template.contains("check.java.vm")) {
+            return packagePath + "biz" + File.separator + "check" + File.separator + pathName + File.separator + className + "Check.java";
+        }
+
+        if (template.contains("client.java.vm")) {
+            return packagePath + "api" + File.separator + "facade" + File.separator + pathName + File.separator + className + "Client.java";
+        }
+
         return null;
     }
 

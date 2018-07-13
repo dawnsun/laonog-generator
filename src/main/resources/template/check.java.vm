@@ -1,0 +1,62 @@
+package ${package}.biz.check.${pathName};
+
+import org.apache.commons.lang.StringUtils;
+import ${package}.common.enums.ErrorCodeEnum;
+import ${package}.common.enums.SuccessCodeEnum;
+import ${package}.common.enums.${pathName}.${className}CodeEnum;
+import ${package}.common.response.CheckResponse;
+import ${package}.api.vos.${pathName}.${className}VO;
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public class ${className}Check {
+
+    /**
+     * 新增入参数据校验
+     * @param sysUserVO
+     * @return
+     */
+    public static CheckResponse checkInsertPaream(${className}VO ${classname}VO){
+        if(null==${classname}VO){
+            return new CheckResponse(ErrorCodeEnum.PARAM_IS_EMPTY.getErrorCode(), ErrorCodeEnum.PARAM_IS_EMPTY.getErrorMessage());
+        }
+        #foreach ($column in $columns)
+            #if(${column.attrname}!="gmtCreate" || ${column.attrname}!="gmtCreate" || ${column.attrname}!="creator" || ${column.attrname}!="modifier" || ${column.attrname}!="isDelete" || ${column.attrname}!="id")
+            #if($column.isNullAble == "NO")
+        if(StringUtils.isEmpty(${classname}VO.get${column.attrName}())){
+            return new CheckResponse(${className}CodeEnum.${column.columnNAME}_EMPTY.getCode(), ${className}CodeEnum.${column.columnNAME}_EMPTY.getMessage());
+        }
+            #end
+            #end
+        #end
+        return new CheckResponse(SuccessCodeEnum.PAREAM_CHEKC.getSuccessMessage());
+    }
+
+    /**
+         * 修改入参数据校验
+         * @param sysUserVO
+         * @return
+         */
+    public static CheckResponse checkUpdatePaream(${className}VO ${classname}VO){
+        if(null==${classname}VO){
+            return new CheckResponse(ErrorCodeEnum.PARAM_IS_EMPTY.getErrorCode(), ErrorCodeEnum.PARAM_IS_EMPTY.getErrorMessage());
+        }
+        #foreach ($column in $columns)
+            #if($column.isNullAble == "NO")
+                if(StringUtils.isEmpty(${classname}VO.get${column.attrName}())){
+                    return new CheckResponse(${className}CodeEnum.${column.columnNAME}_EMPTY.getCode(), ${className}CodeEnum.${column.columnNAME}_EMPTY.getMessage());
+                }
+            #end
+        #end
+        return new CheckResponse(SuccessCodeEnum.PAREAM_CHEKC.getSuccessMessage());
+    }
+}
