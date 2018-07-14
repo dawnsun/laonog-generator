@@ -58,7 +58,7 @@
    <update id="delete${className}" parameterType="${package}.dal.entity.${pathName}.${className}DO" >
       update <include refid="table_name"/>
       <set>
-         is_deleted = #{isDeleted}
+         is_delete = #{isDelete}
       </set>
       <where>
          id = #{id}
@@ -75,8 +75,8 @@
          <if test="id != null and id!=''">
             id=#{id}
          </if>
-         <if test="isDeleted != null and isDeleted!=''">
-            AND is_deleted = #{isDeleted}
+         <if test="isDelete != null and isDelete!=''">
+            AND is_delete = #{isDelete}
          </if>
       </where>
    </select>
