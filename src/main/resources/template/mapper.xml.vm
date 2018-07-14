@@ -75,7 +75,7 @@
          <if test="id != null and id!=''">
             id=#{id}
          </if>
-         <if test="isDelete != null and isDelete!=''">
+         <if test="isDelete != null and isDelete!= -1">
             AND is_delete = #{isDelete}
          </if>
       </where>
