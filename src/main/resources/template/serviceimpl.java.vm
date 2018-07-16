@@ -12,6 +12,8 @@ import ${package}.biz.converter.${pathName}.${className}Converter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.List;
+import ${package}.common.enums.ErrorCodeEnum;
+import ${package}.common.enums.SuccessCodeEnum;
 
 /**
  * ${comments}
@@ -37,15 +39,15 @@ public class ${className}ServiceImpl implements ${className}Service{
             ${className}DO ${classname}DO = ${className}Converter.convertVO2DO(${classname}VO);
             Integer id = ${classname}DAO.insert${className}(${classname}DO);
             if(id>0){
-                    ${classname}VO = ${className}Converter.convertDO2VO(${classname}DO);
+##                    ${classname}VO = ${className}Converter.convertDO2VO(${classname}DO);
                 return true;
             }else{
-                    ${classname}VO = null;
+##                    ${classname}VO = null;
                 return false;
             }
         } catch (Exception e) {
             logger.error("${className}Service insert${className} " + e);
-                ${classname}VO = null;
+##                ${classname}VO = null;
             return false;
         }
     }
@@ -103,10 +105,8 @@ public class ${className}ServiceImpl implements ${className}Service{
     @Override
     public ${className}VO get${className}(${className}Query ${classname}Query){
         try{
-            ${className}VO ${classname}VO = new ${className}VO();
             ${className}DO ${classname}DO = ${classname}DAO.get${className}(${classname}Query);
-            ${classname}VO = ${classname}Converter.convertDO2VO(${classname}DO);
-            return ${classname}VO;
+            return ${classname}Converter.convertDO2VO(${classname}DO);
         } catch (Exception e) {
             logger.error("${className}Service get${className} " + e);
             return null;
@@ -121,10 +121,8 @@ public class ${className}ServiceImpl implements ${className}Service{
     @Override
     public List<${className}VO> get${className}List(${className}Query ${classname}Query){
         try{
-            List<${className}VO> ${classname}VOList = new ArrayList<>();
             List<${className}DO> ${classname}DOList = ${classname}DAO.get${className}List(${classname}Query);
-            ${classname}VOList =  ${classname}Converter.convertDOs2VOs(${classname}DOList);
-            return ${classname}VOList;
+            return ${classname}Converter.convertDOs2VOs(${classname}DOList);
         } catch (Exception e) {
             logger.error("${className}Service get${className}List " + e);
             return null;
@@ -143,10 +141,10 @@ public class ${className}ServiceImpl implements ${className}Service{
             Long count = ${classname}DAO.get${className}Count(${classname}Query);
             List<${className}DO> ${classname}DOList = ${classname}DAO.get${className}List(${classname}Query);
             ${classname}VOList =  ${classname}Converter.convertDOs2VOs(${classname}DOList);
-            return new TableResultResponse<${className}VO>(count,${classname}VOList);
+            return new TableResultResponse<>(SuccessCodeEnum.QUERY_PAGE_SUCCESS.getSuccessMessage(),sysUserQuery.getPageNo(), sysUserQuery.getPageSize(), count,${classname}VOList);
         } catch (Exception e) {
             logger.error("${className}Service get${className}Page " + e);
-            return null;
+            return new TableResultResponse<>(ErrorCodeEnum.QUERY_PAGE_ERROR.getErrorCode(),ErrorCodeEnum.QUERY_PAGE_ERROR.getErrorMessage());
         }
     }
 }

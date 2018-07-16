@@ -6,6 +6,9 @@ import ${package}.common.enums.SuccessCodeEnum;
 import ${package}.common.enums.${pathName}.${className}CodeEnum;
 import ${package}.common.response.CheckResponse;
 import ${package}.api.vos.${pathName}.${className}VO;
+import ${package}.common.constant.CommonConstants;
+import ${package}.common.constant.DataStateConstants;
+import ${package}.dal.query.${pathName}.${className}Query;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
 #end
@@ -115,6 +118,39 @@ public class ${className}Check {
             return new CheckResponse(ErrorCodeEnum.PARAM_IS_EMPTY.getErrorCode(),
                 ErrorCodeEnum.PARAM_IS_EMPTY.getErrorMessage());
         }
+        return new CheckResponse(SuccessCodeEnum.PAREAM_CHEKC.getSuccessMessage());
+    }
+
+    /**
+     * 列表查询数据校验
+     *
+     * @param ${classname}Query
+     * @return
+     */
+    public static CheckResponse checkListPaream(${className}Query ${classname}Query) {
+        ${classname}Query.setIsDelete(DataStateConstants.IS_DELETED);
+        return new CheckResponse(SuccessCodeEnum.PAREAM_CHEKC.getSuccessMessage());
+    }
+
+    /**
+     * 分页查询数据校验
+     *
+     * @param ${classname}Query
+     * @return
+     */
+    public static CheckResponse checkPagePaream(${className}Query ${classname}Query) {
+        if (null == ${classname}Query) {
+            return new CheckResponse(ErrorCodeEnum.PARAM_IS_EMPTY.getErrorCode(),
+                ErrorCodeEnum.PARAM_IS_EMPTY.getErrorMessage());
+        }
+        if (null == ${classname}Query.getPageSize() || null == ${classname}Query.getPageNo()) {
+            ${classname}Query.setPageNo(CommonConstants.DEFAULT_PAGE_NO);
+            ${classname}Query.setPageSize(CommonConstants.DEFAULT_PAGE_SIZE);
+            ${classname}Query.setOffset(CommonConstants.DEFAULT_PAGE_SORT);
+        } else {
+            ${classname}Query.setOffset((${classname}Query.getPageNo() - 1) * ${classname}Query.getPageSize());
+        }
+        ${classname}Query.setIsDelete(DataStateConstants.IS_DELETED);
         return new CheckResponse(SuccessCodeEnum.PAREAM_CHEKC.getSuccessMessage());
     }
 }

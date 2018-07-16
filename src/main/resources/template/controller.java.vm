@@ -2,6 +2,8 @@ package ${package}.web.controller;
 
 import ${package}.api.facade.${pathName}.${className}Client;
 import com.laonog.common.constants.DataStateConstants;
+import ${package}.common.response.CheckResponse;
+import ${package}.biz.check.${pathName}.${className}Check;
 import ${package}.biz.service.${pathName}.${className}Service;
 import ${package}.biz.vos.${pathName}.${className}VO;
 import ${package}.biz.query.${pathName}.${className}Query;
@@ -9,7 +11,11 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 @RestController
 public class ${className}Controller implements ${className}Client{
@@ -24,10 +30,16 @@ public class ${className}Controller implements ${className}Client{
      */
     @Override
     public ObjectRestResponse<${className}VO> insert${className}(@RequestBody ${className}VO ${classname}VO){
-        ObjectRestResponse<${className}VO> ${classname}ObjectRestResponse = new ObjectRestResponse<>();
-        ${classname}Service.insert${className}(${classname}VO);
-        ${classname}ObjectRestResponse.data(${classname}VO);
-        return ${classname}ObjectRestResponse;
+        CheckResponse checkResponse = ${className}Check.checkInsertPaream(${classname}VO);
+        if(checkResponse.isRel()){
+            return new ObjectRestResponse<>(checkResponse.getErrorCode(),checkResponse.getMsg());
+        }
+        boolean result = ${classname}Service.insert${className}(${classname}VO);
+        if(result){
+            return new ObjectRestResponse<>(SuccessCodeEnum.INSERT_SUCCESS.getSuccessMessage(),${classname}VO);
+        }else{
+            return new ObjectRestResponse<>(ErrorCodeEnum.INSERT_ERROR.getErrorCode(),ErrorCodeEnum.INSERT_ERROR.getErrorMessage(),${classname}VO);
+        }
     }
 
     /**
@@ -37,13 +49,19 @@ public class ${className}Controller implements ${className}Client{
      */
     @Override
     public ObjectRestResponse<${className}VO> get${className}(@PathVariable Long id){
-        ObjectRestResponse<${className}VO> ${classname}ObjectRestResponse = new ObjectRestResponse<>();
+        CheckResponse checkResponse = ${className}Check.checkPareamKey(id);
+        if(checkResponse.isRel()){
+            return new ObjectRestResponse<>(checkResponse.getErrorCode(),checkResponse.getMsg());
+        }
         ${className}Query ${classname}Query = new ${className}Query();
         ${classname}Query.setIsDeleted(DataStateConstants.IS_DELETED);
         ${classname}Query.setId(id);
         ${className}VO ${classname}VO = ${classname}Service.get${className}(${classname}Query);
-        ${classname}ObjectRestResponse.data(${classname}VO);
-        return ${classname}ObjectRestResponse;
+        if(null != ${classname}VO){
+            return new ObjectRestResponse<>(SuccessCodeEnum.QUERY_SUCCESS.getSuccessMessage(),${classname}VO);
+        }else{
+            return new ObjectRestResponse<>(ErrorCodeEnum.QUERY_ERROR.getErrorCode(),ErrorCodeEnum.QUERY_ERROR.getErrorMessage(),${classname}VO);
+        }
     }
 
     /**
@@ -53,10 +71,23 @@ public class ${className}Controller implements ${className}Client{
      */
     @Override
     public ObjectRestResponse<${className}VO> update${className}(@RequestBody ${className}VO ${classname}VO){
-        ObjectRestResponse<${className}VO> ${classname}ObjectRestResponse = new ObjectRestResponse<>();
-        ${classname}Service.update${className}(${classname}VO);
-        ${classname}ObjectRestResponse.data(${classname}VO);
-        return ${classname}ObjectRestResponse;
+        CheckResponse checkResponse = ${className}Check.checkUpdatePaream(${classname}VO);
+        if(checkResponse.isRel()){
+            return new ObjectRestResponse<>(checkResponse.getErrorCode(),checkResponse.getMsg());
+        }
+            ${className}Query ${classname}Query = new ${className}Query();
+            ${classname}Query.setIsDeleted(DataStateConstants.IS_DELETED);
+            ${classname}Query.setId(id);
+            ${className}VO ${classname}VOOld = ${classname}Service.get${className}(${classname}Query);
+        if(null == ${classname}VOOld){
+            return new ObjectRestResponse<>(ErrorCodeEnum.UPDATE_ERROR.getErrorCode(),ErrorCodeEnum.UPDATE_ERROR.getErrorMessage(),sysUserVO);
+        }
+        boolean result = ${classname}Service.update${className}(${classname}VO);
+        if(result){
+            return new ObjectRestResponse<>(SuccessCodeEnum.UPDATE_SUCCESS.getSuccessMessage(),${classname}VO);
+        }else{
+            return new ObjectRestResponse<>(ErrorCodeEnum.UPDATE_ERROR.getErrorCode(),ErrorCodeEnum.UPDATE_ERROR.getErrorMessage(),${classname}VO);
+        }
     }
 
     /**
@@ -66,11 +97,26 @@ public class ${className}Controller implements ${className}Client{
      */
     @Override
     public ObjectRestResponse<Boolean> delete${className}(@PathVariable Long id){
-        ${className}VO ${classname}VO = new ${className}VO();
-        ${classname}VO.setIsDeleted(DataStateConstants.DELETED);
-        ${classname}VO.setId(id);
-        ${classname}Service.delete${className}(${classname}VO);
-        return new ObjectRestResponse<${classname}VO>();
+
+        CheckResponse checkResponse = ${className}Check.checkPareamKey(id);
+        if(checkResponse.isRel()){
+            return new ObjectRestResponse<>(checkResponse.getErrorCode(),checkResponse.getMsg());
+        }
+            ${className}Query ${classname}Query = new ${className}Query();
+            ${classname}Query.setIsDeleted(DataStateConstants.IS_DELETED);
+            ${classname}Query.setId(id);
+            ${className}VO ${classname}VOOld = ${classname}Service.get${className}(${classname}Query);
+        if(null == ${classname}VOOld){
+            return new ObjectRestResponse<>(ErrorCodeEnum.UPDATE_ERROR.getErrorCode(),ErrorCodeEnum.UPDATE_ERROR.getErrorMessage(),Boolean.FALSE);
+        }
+            ${className}VO ${classname}VO = new ${className}VO();
+            ${classname}VO.setId(id);
+        boolean result = ${classname}Service.delete${className}(${classname}VO);
+        if(result){
+            return new ObjectRestResponse<>(SuccessCodeEnum.DELETE_SUCCESS.getSuccessMessage(),result);
+        }else{
+            return new ObjectRestResponse<>(ErrorCodeEnum.DELETE_ERROR.getErrorCode(),ErrorCodeEnum.DELETE_ERROR.getErrorMessage(),result);
+        }
     }
 
     /**
@@ -79,8 +125,17 @@ public class ${className}Controller implements ${className}Client{
      * @return
      */
     @Override
-    public List<${className}VO> get${className}List(@RequestBody ${className}Query ${classname}Query){
-        return ${classname}Service.get${className}List(${classname}Query);
+    public ListRestResponse<${className}VO> get${className}List(@RequestBody ${className}Query ${classname}Query){
+        CheckResponse checkResponse = ${className}Check.checkListPaream(${classname}Query);
+        if(checkResponse.isRel()){
+            return new ListRestResponse<>(checkResponse.getErrorCode(),checkResponse.getMsg());
+        }
+        List<${className}VO> ${classname}VOList = ${classname}Service.get${className}List(${classname}Query);
+        if(null != ${classname}VOList && ${classname}VOList.size()>0){
+            return new ListRestResponse<>(SuccessCodeEnum.QUERY_SUCCESS.getSuccessMessage(),${classname}VOList);
+        }else{
+            return new ListRestResponse<>(ErrorCodeEnum.QUERY_ERROR.getErrorCode(),ErrorCodeEnum.QUERY_ERROR.getErrorMessage(),${classname}VOList);
+        }
     }
 
     /**
@@ -90,6 +145,10 @@ public class ${className}Controller implements ${className}Client{
      */
     @Override
     public TableResultResponse<${className}VO> get${className}Page(@RequestBody ${className}Query ${classname}Query){
+        CheckResponse checkResponse = ${className}Check.checkPagePaream(${classname}Query);
+        if(checkResponse.isRel()){
+            return new TableResultResponse<>(checkResponse.getErrorCode(),checkResponse.getMsg());
+        }
         return ${classname}Service.get${className}Page(${classname}Query);
     }
 

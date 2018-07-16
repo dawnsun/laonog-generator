@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import java.util.List;
 
 /**
  * ${comments}
@@ -59,15 +58,15 @@ public interface ${className}Service {
      * @param sysUserQuery
      * @return
      */
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
-    ListRestResponse<List<${className}VO>> get${className}List(@RequestBody ${className}Query ${classname}Query);
+    @RequestMapping(value = "/list",method = RequestMethod.POST)
+    ListRestResponse<${className}VO> get${className}List(@RequestBody ${className}Query ${classname}Query);
 
     /**
      * 查询分页
      * @param sysUserQuery
      * @return
      */
-    @RequestMapping(value = "/page",method = RequestMethod.GET)
+    @RequestMapping(value = "/page",method = RequestMethod.POST)
     TableResultResponse<${className}VO> get${className}Page(@RequestBody ${className}Query ${classname}Query);
 
 }
