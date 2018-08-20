@@ -39,7 +39,7 @@ public interface ${className}Service {
 
     /**
      * 修改
-     * @param sysUserVO
+     * @param ${classname}VO
      * @return
      */
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
@@ -55,7 +55,7 @@ public interface ${className}Service {
 
     /**
      * 查询列表
-     * @param sysUserQuery
+     * @param ${classname}Query
      * @return
      */
     @RequestMapping(value = "/list",method = RequestMethod.POST)
@@ -63,7 +63,7 @@ public interface ${className}Service {
 
     /**
      * 查询分页
-     * @param sysUserQuery
+     * @param ${classname}Query
      * @return
      */
     @RequestMapping(value = "/page",method = RequestMethod.POST)

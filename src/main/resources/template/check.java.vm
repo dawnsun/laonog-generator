@@ -26,7 +26,7 @@ public class ${className}Check {
     /**
      * 新增入参数据校验
      *
-     * @param sysUserVO
+     * @param ${classname}VO
      * @return
      */
     public static CheckResponse checkInsertPaream(${className}VO ${classname}VO) {
@@ -70,7 +70,7 @@ public class ${className}Check {
 
     /**
      * 修改入参数据校验
-     * @param sysUserVO
+     * @param ${classname}VO
      * @return
      */
     public static CheckResponse checkUpdatePaream(${className}VO ${classname}VO) {

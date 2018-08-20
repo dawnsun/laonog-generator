@@ -141,7 +141,7 @@ public class ${className}ServiceImpl implements ${className}Service{
             Long count = ${classname}DAO.get${className}Count(${classname}Query);
             List<${className}DO> ${classname}DOList = ${classname}DAO.get${className}List(${classname}Query);
             ${classname}VOList =  ${classname}Converter.convertDOs2VOs(${classname}DOList);
-            return new TableResultResponse<>(SuccessCodeEnum.QUERY_PAGE_SUCCESS.getSuccessMessage(),sysUserQuery.getPageNo(), sysUserQuery.getPageSize(), count,${classname}VOList);
+            return new TableResultResponse<>(SuccessCodeEnum.QUERY_PAGE_SUCCESS.getSuccessMessage(),${classname}Query.getPageNo(), ${classname}Query.getPageSize(), count,${classname}VOList);
         } catch (Exception e) {
             logger.error("${className}Service get${className}Page " + e);
             return new TableResultResponse<>(ErrorCodeEnum.QUERY_PAGE_ERROR.getErrorCode(),ErrorCodeEnum.QUERY_PAGE_ERROR.getErrorMessage());

@@ -80,7 +80,7 @@ public class ${className}Controller implements ${className}Client{
             ${classname}Query.setId(id);
             ${className}VO ${classname}VOOld = ${classname}Service.get${className}(${classname}Query);
         if(null == ${classname}VOOld){
-            return new ObjectRestResponse<>(ErrorCodeEnum.UPDATE_ERROR.getErrorCode(),ErrorCodeEnum.UPDATE_ERROR.getErrorMessage(),sysUserVO);
+            return new ObjectRestResponse<>(ErrorCodeEnum.UPDATE_ERROR.getErrorCode(),ErrorCodeEnum.UPDATE_ERROR.getErrorMessage(),${classname}VO);
         }
         boolean result = ${classname}Service.update${className}(${classname}VO);
         if(result){

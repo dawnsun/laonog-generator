@@ -88,7 +88,7 @@ public class GeneratorUtils {
             columnEntity.setAttrname(StringUtils.uncapitalize(attrName));
 
             //列的数据类型，转换成Java类型
-            String attrType = config.getString(columnEntity.getDataType(), "unknowType");
+            String attrType = config.getString(StringUtils.lowerCase(columnEntity.getDataType()), "unknowType");
             columnEntity.setAttrType(attrType);
 
             //是否主键
