@@ -15,7 +15,7 @@ import java.util.List;
 @Repository
 public class ${className}Mapper extends BaseMapper {
 
-    private static final String NAME_SPACE = "${className}Mapper.";
+    private static final String NAME_SPACE = "${classname}Mapper.";
 
     #*/**
      * 新增${comments}
