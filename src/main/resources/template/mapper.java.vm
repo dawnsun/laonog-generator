@@ -1,0 +1,84 @@
+package ${package}.dal.dao.${pathName};
+
+import ${package}.dal.query.${pathName}.${className}Query;
+import ${package}.dal.entity.${pathName}.${className}DO;
+import org.springframework.stereotype.Repository;
+import java.util.List;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Repository
+public class ${className}Mapper extends BaseMapper {
+
+    private static final String NAME_SPACE = "${className}Mapper.";
+
+    #*/**
+     * 新增${comments}
+     * @param ${classname}DO
+     * @return
+     */
+    Long insert${className}(${className}DO ${classname}DO){
+        getSqlSession().insert(NAME_SPACE + "insert${className}", ${classname}DO);
+        return bannerDO.getId();
+    }
+
+    /**
+     * 删除${comments}
+     * @param ${classname}DO
+     * @return
+     */
+    Integer delete${className}(${className}DO ${classname}DO){
+        return getSqlSession().update(NAME_SPACE + "delete${className}", ${classname}DO);
+    }
+
+    /**
+     * 修改${comments}
+     * @param ${classname}DO
+     * @return
+     */
+    Integer update${className}(${className}DO ${classname}DO){
+        return getSqlSession().update(NAME_SPACE + "updatee${className}", ${classname}DO);
+    }*#
+
+    /**
+     * 查询单个${comments}
+     * @param ${classname}Query
+     * @return
+     */
+    ${className}DO get${className}(${className}Query ${classname}Query){
+        return this.getSqlSession().selectOne(NAME_SPACE + "get${className}", ${classname}Query);
+    }
+
+    /**
+     * 查询数量${comments}
+     * @param ${classname}Query
+     * @return
+     */
+    Long get${className}Count(${className}Query ${classname}Query){
+        return this.getSqlSession().selectOne(NAME_SPACE + "get${className}", ${classname}Query);
+    }
+
+    /**
+     * 查询列表${comments}
+     * @param ${classname}Query
+     * @return
+     */
+    List<${className}DO> get${className}List(${className}Query ${classname}Query){
+        return this.getSqlSession().selectList(NAME_SPACE + "get${className}", ${classname}Query);
+    }
+
+    /**
+     * 查询分页${comments}
+     * @param ${classname}Query
+     * @return
+     */
+    List<${className}DO> get${className}Page(${className}Query ${classname}Query){
+        return this.getSqlSession().selectList(NAME_SPACE + "get${className}", ${classname}Query);
+    }
+
+}

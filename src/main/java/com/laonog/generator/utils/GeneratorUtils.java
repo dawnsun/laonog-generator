@@ -41,6 +41,7 @@ public class GeneratorUtils {
         templates.add("template/codeEnum.java.vm");
         templates.add("template/check.java.vm");
         templates.add("template/client.java.vm");
+        templates.add("template/mapper.java.vm");
 
         return templates;
     }
@@ -224,6 +225,11 @@ public class GeneratorUtils {
         if (template.contains("dao.java.vm")) {
             return packagePath + "dal" + File.separator + "dao" + File.separator + pathName + File.separator + className + "DAO.java";
         }
+
+        if (template.contains("mapper.java.vm")) {
+            return packagePath + "dal" + File.separator + "mapper" + File.separator + pathName + File.separator + className + "Mapper.java";
+        }
+
 
         if (template.contains("entity.java.vm")) {
             return packagePath + "dal" + File.separator + "entity" + File.separator + pathName + File.separator + className + "DO.java";
