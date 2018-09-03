@@ -102,11 +102,19 @@ public class GeneratorUtils {
                     allColumnValue +="NOW(), ";
                     allColumnValueList +="NOW(), ";
                     break;
+                case "gmtCreated":
+                    allColumnValue +="NOW(), ";
+                    allColumnValueList +="NOW(), ";
+                    break;
                 case "gmtModified":
                     allColumnValue +="NOW(), ";
                     allColumnValueList +="NOW(), ";
                     break;
                 case "isDelete":
+                    allColumnValue +="0, ";
+                    allColumnValueList +="0, ";
+                    break;
+                case "deleted":
                     allColumnValue +="0, ";
                     allColumnValueList +="0, ";
                     break;

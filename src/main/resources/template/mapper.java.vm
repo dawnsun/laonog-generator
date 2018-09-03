@@ -17,7 +17,7 @@ public class ${className}Mapper extends BaseMapper {
 
     private static final String NAME_SPACE = "${classname}Mapper.";
 
-    #*/**
+    /**
      * 新增${comments}
      * @param ${classname}DO
      * @return
@@ -43,7 +43,7 @@ public class ${className}Mapper extends BaseMapper {
      */
     Integer update${className}(${className}DO ${classname}DO){
         return getSqlSession().update(NAME_SPACE + "updatee${className}", ${classname}DO);
-    }*#
+    }
 
     /**
      * 查询单个${comments}
