@@ -1,7 +1,6 @@
 package ${package}.dal.query.${pathName};
 
 import java.util.Date;
-import javax.persistence.*;
 import ${package}common.util.BaseQuery;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;

@@ -22,9 +22,8 @@ public class ${className}Mapper extends BaseMapper {
      * @param ${classname}DO
      * @return
      */
-    Long insert${className}(${className}DO ${classname}DO){
-        getSqlSession().insert(NAME_SPACE + "insert${className}", ${classname}DO);
-        return bannerDO.getId();
+    public Integer insert${className}(${className}DO ${classname}DO){
+        return getSqlSession().insert(NAME_SPACE + "insert${className}", ${classname}DO);
     }
 
     /**
@@ -32,7 +31,7 @@ public class ${className}Mapper extends BaseMapper {
      * @param ${classname}DO
      * @return
      */
-    Integer delete${className}(${className}DO ${classname}DO){
+    public Integer delete${className}(${className}DO ${classname}DO){
         return getSqlSession().update(NAME_SPACE + "delete${className}", ${classname}DO);
     }
 
@@ -41,7 +40,7 @@ public class ${className}Mapper extends BaseMapper {
      * @param ${classname}DO
      * @return
      */
-    Integer update${className}(${className}DO ${classname}DO){
+    public Integer update${className}(${className}DO ${classname}DO){
         return getSqlSession().update(NAME_SPACE + "updatee${className}", ${classname}DO);
     }
 
@@ -50,7 +49,7 @@ public class ${className}Mapper extends BaseMapper {
      * @param ${classname}Query
      * @return
      */
-    ${className}DO get${className}(${className}Query ${classname}Query){
+    public ${className}DO get${className}(${className}Query ${classname}Query){
         return this.getSqlSession().selectOne(NAME_SPACE + "get${className}", ${classname}Query);
     }
 
@@ -59,8 +58,8 @@ public class ${className}Mapper extends BaseMapper {
      * @param ${classname}Query
      * @return
      */
-    Long get${className}Count(${className}Query ${classname}Query){
-        return this.getSqlSession().selectOne(NAME_SPACE + "get${className}", ${classname}Query);
+    public Long get${className}Count(${className}Query ${classname}Query){
+        return this.getSqlSession().selectOne(NAME_SPACE + "get${className}Count", ${classname}Query);
     }
 
     /**
@@ -68,8 +67,8 @@ public class ${className}Mapper extends BaseMapper {
      * @param ${classname}Query
      * @return
      */
-    List<${className}DO> get${className}List(${className}Query ${classname}Query){
-        return this.getSqlSession().selectList(NAME_SPACE + "get${className}", ${classname}Query);
+    public List<${className}DO> get${className}List(${className}Query ${classname}Query){
+        return this.getSqlSession().selectList(NAME_SPACE + "get${className}List", ${classname}Query);
     }
 
     /**
@@ -77,8 +76,8 @@ public class ${className}Mapper extends BaseMapper {
      * @param ${classname}Query
      * @return
      */
-    List<${className}DO> get${className}Page(${className}Query ${classname}Query){
-        return this.getSqlSession().selectList(NAME_SPACE + "get${className}", ${classname}Query);
+    public List<${className}DO> get${className}Page(${className}Query ${classname}Query){
+        return this.getSqlSession().selectList(NAME_SPACE + "get${className}Page", ${classname}Query);
     }
 
 }
