@@ -42,7 +42,7 @@ public class GeneratorRest {
     public void code(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String[] tableNames = new String[]{};
         String tables = request.getParameter("tables");
-        tableNames = JSON.parseArray(tables).toArray(tableNames);
+        tableNames = tables.split(",");
 
         byte[] data = generatorService.generatorCode(tableNames);
 
