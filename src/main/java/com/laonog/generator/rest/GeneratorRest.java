@@ -28,6 +28,8 @@ public class GeneratorRest {
      * 列表
      */
     @ResponseBody
+
+    
     @RequestMapping("/page")
     public TableResultResponse<Map<String, Object>> list(@RequestParam Map<String, Object> params) {
         List<Map<String, Object>> result = generatorService.queryList(params);
